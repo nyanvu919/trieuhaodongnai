@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TRIEUHAOTRAVEL - Đơn vị lữ hành uy tín</title>
+    <title>TRIEUHAOTRAVEL - Đồng Nai</title>
     <link rel="stylesheet" href="style.css">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
@@ -13,7 +13,9 @@
 
     <header class="header">
         <div class="container main-header">
-            <div class="logo"><a href="index.html"><i class="fas fa-plane-departure"></i> TRIEUHAO<span>TRAVEL</span></a></div>
+            <div class="logo">
+                <a href="index.html"><i class="fas fa-plane-departure"></i> TRIEUHAO<span>TRAVEL</span></a>
+            </div>
             <div class="search-box">
                 <input type="text" placeholder="Bạn muốn đi du lịch ở đâu?">
                 <button><i class="fas fa-search"></i></button>
@@ -32,12 +34,14 @@
             <div class="banner-content">
                 <h1>KHÁM PHÁ HÀNH TRÌNH MỚI</h1>
                 <p>Cùng TRIEUHAOTRAVEL tận hưởng kỳ nghỉ mơ ước</p>
-                <button class="banner-btn" onclick="document.getElementById('product-list').scrollIntoView()">XEM TOUR NGAY</button>
+                <button class="banner-btn" onclick="document.getElementById('product-list').scrollIntoView({behavior:'smooth'})">XEM TOUR NGAY</button>
             </div>
         </div>
     </div>
 
+    <!-- MAIN LAYOUT CHUẨN 2 CỘT -->
     <main class="container main-layout">
+        <!-- Cột trái: Sidebar -->
         <aside class="sidebar">
             <div class="sidebar-box">
                 <h3 class="sidebar-title"><i class="fas fa-map-marked-alt"></i> ĐIỂM ĐẾN</h3>
@@ -51,51 +55,89 @@
             </div>
         </aside>
 
+        <!-- Cột phải: Danh sách Tour -->
         <section class="content-area">
-            <div class="section-title"><h2>GỢI Ý HÀNH TRÌNH HÔM NAY</h2></div>
-            <div class="product-grid" id="product-list"></div>
+            <div class="section-title">
+                <h2>GỢI Ý HÀNH TRÌNH HÔM NAY</h2>
+            </div>
+            <!-- Grid Tour -->
+            <div class="product-grid" id="product-list">
+                <!-- Tour sẽ được đổ vào đây bằng app.js -->
+            </div>
         </section>
     </main>
 
-    <!-- Admin Panel Button -->
+    <!-- FOOTER TRIEUHAOTRAVEL MỚI - SIÊU ĐẸP -->
+    <footer class="footer">
+        <div class="container footer-grid">
+            <div class="footer-col">
+                <h3 class="footer-logo">TRIEUHAO<span>TRAVEL</span></h3>
+                <p>Chúng tôi tự hào là đơn vị lữ hành uy tín tại Đồng Nai, cam kết mang lại trải nghiệm du lịch tuyệt vời nhất cho khách hàng.</p>
+                <div class="footer-social">
+                    <a href="#"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-youtube"></i></a>
+                    <a href="#"><i class="fab fa-tiktok"></i></a>
+                </div>
+            </div>
+            <div class="footer-col">
+                <h3>QUY ĐỊNH & CHÍNH SÁCH</h3>
+                <ul>
+                    <li><a href="#">Chính sách bảo mật</a></li>
+                    <li><a href="#">Điều khoản sử dụng</a></li>
+                    <li><a href="#">Hướng dẫn đặt tour</a></li>
+                    <li><a href="#">Chính sách đổi trả</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h3>THÔNG TIN LIÊN HỆ</h3>
+                <div class="contact-info">
+                    <p><i class="fas fa-phone-alt"></i> 025.1382.3388</p>
+                    <p><i class="fas fa-mobile-alt"></i> 0908.663.868</p>
+                    <p><i class="fas fa-envelope"></i> thtourist.vpbh@gmail.com</p>
+                    <p><i class="fas fa-map-marker-alt"></i> 21 Nguyễn Thị Hiền, P. Trấn Biên, Đồng Nai</p>
+                </div>
+            </div>
+            <div class="footer-col">
+                <h3>THANH TOÁN</h3>
+                <div class="payment-methods">
+                    <i class="fab fa-cc-visa"></i>
+                    <i class="fab fa-cc-mastercard"></i>
+                    <i class="fas fa-money-check-alt"></i>
+                </div>
+                <img src="https://upload.wikimedia.org/wikipedia/commons/d/d1/Bocongthuong.png" width="120" style="margin-top: 15px;">
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>© 2026 <span>TRIEUHAOTRAVEL</span>. All Rights Reserved. Designed for Excellence.</p>
+        </div>
+    </footer>
+
+    <!-- ADMIN PANEL (ẨN MẶC ĐỊNH) -->
     <button id="admin-trigger" onclick="toggleAdminPanel()"><i class="fas fa-cog"></i></button>
     <div id="admin-panel" class="admin-modal">
         <div class="admin-content">
-            <div class="admin-header"><h3>Quản lý hệ thống</h3><span onclick="toggleAdminPanel()">&times;</span></div>
-            <div class="form-group"><input type="text" id="p-name" placeholder="Tên Tour"></div>
+            <div class="admin-header"><h3>Quản lý hệ thống</h3><span onclick="toggleAdminPanel()" style="cursor:pointer;font-size:24px;">&times;</span></div>
+            <input type="text" id="p-name" placeholder="Tên Tour">
             <div class="form-row">
                 <input type="number" id="p-price" placeholder="Giá bán">
                 <input type="number" id="p-old-price" placeholder="Giá gốc">
             </div>
             <input type="text" id="p-duration" placeholder="Thời gian (VD: 3N2Đ)" style="width:100%; padding:10px; margin-top:10px;">
             <select id="p-category" style="width:100%; padding:10px; margin-top:10px;">
-                <option value="Miền Bắc">Miền Bắc</option><option value="Miền Trung">Miền Trung</option>
-                <option value="Miền Nam">Miền Nam</option><option value="Nước Ngoài">Nước Ngoài</option>
+                <option value="Miền Bắc">Miền Bắc</option>
+                <option value="Miền Trung">Miền Trung</option>
+                <option value="Miền Nam">Miền Nam</option>
+                <option value="Nước Ngoài">Nước Ngoài</option>
             </select>
-            <textarea id="p-desc" placeholder="Mô tả chi tiết tour..." style="width:100%; margin-top:10px; padding:10px; height:80px;"></textarea>
+            <textarea id="p-desc" placeholder="Mô tả lịch trình..." style="width:100%; margin-top:10px; padding:10px; height:80px;"></textarea>
             <input type="file" id="p-file" accept="image/*" style="margin-top:10px;">
             <div class="admin-footer">
-                <button class="btn-reset" onclick="resetData()">Reset</button>
+                <button class="btn-reset" onclick="resetData()">Khôi phục</button>
                 <button class="btn-save" onclick="saveProduct()">Lưu Tour</button>
             </div>
         </div>
     </div>
-
-    <footer class="footer">
-        <div class="container footer-grid">
-            <div class="footer-col">
-                <h3 class="footer-logo">TRIEUHAO<span>TRAVEL</span></h3>
-                <p>Khám phá vẻ đẹp Việt Nam cùng TRIEUHAOTRAVEL.</p>
-            </div>
-            <div class="footer-col">
-                <h3>LIÊN HỆ</h3>
-                <p><i class="fas fa-phone-alt"></i> 025.1382.3388 – 0908.663.868</p>
-                <p><i class="fas fa-envelope"></i> thtourist.vpbh@gmail.com</p>
-                <p><i class="fas fa-map-marker-alt"></i> 21 Nguyễn Thị Hiền, Trấn Biên, Đồng Nai</p>
-            </div>
-        </div>
-        <div class="footer-bottom"><p>© 2026 TRIEUHAOTRAVEL. All Rights Reserved.</p></div>
-    </footer>
 
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
     <script src="app.js"></script>
