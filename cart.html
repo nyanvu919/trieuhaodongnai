@@ -1,59 +1,32 @@
 <!DOCTYPE html>
 <html lang="vi">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Danh sách đặt Tour - TRIEUHAOTRAVEL</title>
+    <meta charset="UTF-8"><title>Đặt Tour - TRIEUHAOTRAVEL</title>
     <link rel="stylesheet" href="style.css">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 </head>
-<body style="background-color: #f0f2f5;">
-
+<body style="background:#f0f2f5;">
     <header class="header-cart">
         <div class="container header-cart-content">
             <a href="index.html" class="logo-cart">TRIEUHAO<span>TRAVEL</span></a>
-            <div class="header-title">Danh sách đặt Tour</div>
+            <div class="header-title">Xác nhận đặt Tour</div>
         </div>
     </header>
-
     <main class="container cart-page-container">
-        <div class="back-link"><a href="index.html"><i class="fas fa-chevron-left"></i> Tìm thêm Tour khác</a></div>
-
         <div class="cart-layout">
-            <div class="cart-left">
-                <div class="cart-card">
-                    <div class="cart-card-header">
-                        <div style="flex: 2;">Thông tin Tour</div>
-                        <div style="flex: 1; text-align: center;">Giá/Khách</div>
-                        <div style="flex: 1; text-align: center;">Số người</div>
-                        <div style="flex: 1; text-align: center;">Tổng cộng</div>
-                        <div style="width: 50px;"></div>
-                    </div>
-                    <div id="cart-list-container" class="cart-items-list"></div>
-                </div>
-            </div>
-
+            <div class="cart-left"><div class="cart-card" id="cart-list-container"></div></div>
             <div class="cart-right">
                 <div class="cart-card checkout-box">
-                    <h3 class="checkout-title">Thông tin liên hệ</h3>
-                    <div class="checkout-form">
-                        <div class="input-group"><label>Họ tên</label><input type="text" id="c-name" placeholder="Tên trưởng đoàn"></div>
-                        <div class="input-group"><label>Số điện thoại</label><input type="text" id="c-phone"></div>
-                        <div class="input-group"><label>Địa chỉ</label><textarea id="c-address" rows="2"></textarea></div>
-                    </div>
-                    <div class="order-summary">
-                        <div class="summary-line"><span>Tạm tính</span><span id="temp-total">0đ</span></div>
-                        <div class="summary-line"><span>Phí phục vụ</span><span>Miễn phí</span></div>
-                        <hr><div class="summary-line total-line"><span>Tổng thanh toán</span><span id="final-total">0đ</span></div>
-                    </div>
+                    <h3>Thông tin liên hệ</h3>
+                    <input type="text" id="c-name" placeholder="Họ tên trưởng đoàn" style="width:100%; padding:10px; margin-bottom:10px;">
+                    <input type="text" id="c-phone" placeholder="Số điện thoại" style="width:100%; padding:10px; margin-bottom:10px;">
+                    <textarea id="c-address" placeholder="Địa chỉ" style="width:100%; padding:10px; margin-bottom:10px;"></textarea>
+                    <div class="summary-line"><span>Tổng cộng:</span><span id="final-total" style="font-weight:bold; color:#003366;">0đ</span></div>
                     <button class="btn-checkout-page" onclick="processCheckoutPage()">XÁC NHẬN ĐẶT TOUR</button>
-                    <p style="text-align:center; font-size:12px; margin-top:10px; color:#888;">TRIEUHAOTRAVEL sẽ liên hệ lại trong 15 phút</p>
                 </div>
             </div>
         </div>
     </main>
-
     <script src="app.js"></script>
 </body>
 </html>
