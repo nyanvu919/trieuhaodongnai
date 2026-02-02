@@ -6,12 +6,11 @@
     <title>TRIEUHAOTRAVEL - Đơn vị lữ hành uy tín</title>
     <link rel="stylesheet" href="style.css">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
 </head>
 <body>
 
-    <!-- Header -->
     <header class="header">
         <div class="container main-header">
             <div class="logo"><a href="index.html"><i class="fas fa-plane-departure"></i> TRIEUHAO<span>TRAVEL</span></a></div>
@@ -21,7 +20,7 @@
             </div>
             <div class="cart-btn-wrapper">
                 <a href="cart.html" class="cart-icon">
-                    <i class="fas fa- suitcase-rolling"></i>
+                    <i class="fas fa-suitcase-rolling"></i>
                     <span id="cart-count">0</span>
                 </a>
             </div>
@@ -33,12 +32,11 @@
             <div class="banner-content">
                 <h1>KHÁM PHÁ HÀNH TRÌNH MỚI</h1>
                 <p>Cùng TRIEUHAOTRAVEL tận hưởng kỳ nghỉ mơ ước</p>
-                <button class="banner-btn">SĂN ƯU ĐÃI NGAY</button>
+                <button class="banner-btn" onclick="document.getElementById('product-list').scrollIntoView()">XEM TOUR NGAY</button>
             </div>
         </div>
     </div>
 
-    <!-- Layout Chính -->
     <main class="container main-layout">
         <aside class="sidebar">
             <div class="sidebar-box">
@@ -55,55 +53,29 @@
 
         <section class="content-area">
             <div class="section-title"><h2>GỢI Ý HÀNH TRÌNH HÔM NAY</h2></div>
-            <div class="product-grid" id="product-list">
-                <!-- Tour sẽ hiện ở đây -->
-            </div>
+            <div class="product-grid" id="product-list"></div>
         </section>
     </main>
 
-    <!-- MODAL CHI TIẾT TOUR -->
-    <div id="tour-detail-modal" class="tour-modal">
-        <div class="tour-modal-content">
-            <span class="close-modal-btn" onclick="closeTourDetail()">&times;</span>
-            <div class="modal-grid">
-                <div class="modal-left"><img id="modal-img" src="" alt=""></div>
-                <div class="modal-right">
-                    <h2 id="modal-title"></h2>
-                    <div class="modal-meta">
-                        <span id="modal-duration"><i class="fas fa-clock"></i> </span> | 
-                        <span id="modal-category"><i class="fas fa-map-marker-alt"></i> </span>
-                    </div>
-                    <div class="modal-price-box">
-                        <span class="label">Giá Tour trọn gói:</span>
-                        <span id="modal-price" class="main-price"></span>
-                    </div>
-                    <div class="modal-description">
-                        <h3>Thông tin lịch trình:</h3>
-                        <p id="modal-desc"></p>
-                    </div>
-                    <button id="modal-book-btn" class="btn-book-now">ĐẶT TOUR NGAY</button>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Nút Admin -->
+    <!-- Admin Panel Button -->
     <button id="admin-trigger" onclick="toggleAdminPanel()"><i class="fas fa-cog"></i></button>
     <div id="admin-panel" class="admin-modal">
         <div class="admin-content">
             <div class="admin-header"><h3>Quản lý hệ thống</h3><span onclick="toggleAdminPanel()">&times;</span></div>
-            <input type="text" id="p-name" placeholder="Tên Tour">
-            <input type="number" id="p-price" placeholder="Giá bán">
-            <input type="number" id="p-old-price" placeholder="Giá gốc (để tính % giảm)">
-            <input type="text" id="p-duration" placeholder="Thời gian (VD: 3N2Đ)">
-            <select id="p-category" style="width:100%; padding:10px; margin-top:10px; border-radius:5px;">
+            <div class="form-group"><input type="text" id="p-name" placeholder="Tên Tour"></div>
+            <div class="form-row">
+                <input type="number" id="p-price" placeholder="Giá bán">
+                <input type="number" id="p-old-price" placeholder="Giá gốc">
+            </div>
+            <input type="text" id="p-duration" placeholder="Thời gian (VD: 3N2Đ)" style="width:100%; padding:10px; margin-top:10px;">
+            <select id="p-category" style="width:100%; padding:10px; margin-top:10px;">
                 <option value="Miền Bắc">Miền Bắc</option><option value="Miền Trung">Miền Trung</option>
                 <option value="Miền Nam">Miền Nam</option><option value="Nước Ngoài">Nước Ngoài</option>
             </select>
             <textarea id="p-desc" placeholder="Mô tả chi tiết tour..." style="width:100%; margin-top:10px; padding:10px; height:80px;"></textarea>
             <input type="file" id="p-file" accept="image/*" style="margin-top:10px;">
             <div class="admin-footer">
-                <button class="btn-reset" onclick="resetData()">Xóa hết/Reset</button>
+                <button class="btn-reset" onclick="resetData()">Reset</button>
                 <button class="btn-save" onclick="saveProduct()">Lưu Tour</button>
             </div>
         </div>
