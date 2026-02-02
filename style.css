@@ -115,3 +115,84 @@ body.admin-mode .btn-delete-card { display: block; }
     .footer-grid { grid-template-columns: 1fr; }
     .banner-content h1 { font-size: 2rem; }
 }
+
+/* --- DETAIL PAGE CUSTOM STYLES --- */
+.back-to-home { color: #666; font-size: 14px; display: inline-block; padding: 10px 0; }
+.back-to-home:hover { color: var(--primary); }
+
+.detail-wrapper { margin-bottom: 50px; }
+
+.detail-header-card {
+    display: flex; background: white; border-radius: 16px;
+    overflow: hidden; box-shadow: 0 10px 30px rgba(0,0,0,0.05); gap: 0;
+}
+
+.detail-image-box { flex: 1.2; position: relative; min-height: 450px; }
+.detail-image-box img { width: 100%; height: 100%; object-fit: cover; }
+
+.detail-info-box { flex: 1; padding: 40px; display: flex; flex-direction: column; justify-content: center; }
+
+#detail-title { font-size: 28px; color: var(--primary); font-weight: 800; line-height: 1.3; margin-bottom: 15px; }
+
+.tour-meta-tags { display: flex; gap: 15px; margin-bottom: 25px; font-size: 14px; color: #666; }
+.tour-meta-tags span i { color: var(--primary); margin-right: 5px; }
+
+.price-container { background: #fff9f0; padding: 20px; border-radius: 12px; margin-bottom: 25px; border: 1px dashed var(--accent); }
+.price-label { font-size: 14px; color: #888; }
+.main-price { font-size: 36px; color: var(--red); font-weight: 800; display: block; }
+.old-price-detail { text-decoration: line-through; color: #bbb; font-size: 18px; margin-left: 10px; }
+
+.promo-box { margin-bottom: 30px; font-size: 14px; color: #444; }
+.promo-box p { margin-bottom: 8px; }
+.promo-box i { color: #27ae60; margin-right: 10px; }
+
+.btn-primary-large {
+    background: var(--primary); color: white; border: none; padding: 18px;
+    border-radius: 10px; font-size: 18px; font-weight: 800; cursor: pointer;
+    transition: 0.3s; box-shadow: 0 5px 15px rgba(0, 51, 102, 0.2);
+}
+.btn-primary-large:hover { background: var(--primary-light); transform: translateY(-3px); }
+
+/* Content sections */
+.detail-content-layout { display: flex; gap: 30px; margin-top: 30px; }
+.content-left { flex: 2; }
+.content-right { flex: 1; }
+
+.content-section { background: white; padding: 30px; border-radius: 16px; margin-bottom: 30px; box-shadow: 0 5px 15px rgba(0,0,0,0.03); }
+.section-heading { font-size: 20px; color: var(--primary); margin-bottom: 20px; padding-bottom: 10px; border-bottom: 2px solid #eee; }
+
+.description-text { line-height: 1.8; color: #555; white-space: pre-line; }
+
+/* Itinerary Timeline */
+.itinerary-list { position: relative; padding-left: 20px; }
+.itinerary-list::before { content: ''; position: absolute; left: 0; top: 10px; height: 90%; width: 2px; background: #eee; }
+.itinerary-item { position: relative; margin-bottom: 30px; padding-left: 30px; }
+.day-circle {
+    position: absolute; left: -11px; top: 0; width: 22px; height: 22px;
+    background: var(--primary); color: white; border-radius: 50%;
+    text-align: center; font-size: 11px; line-height: 22px; font-weight: bold;
+}
+.day-content h4 { color: #333; margin-bottom: 8px; font-size: 16px; }
+.day-content p { font-size: 14px; color: #666; line-height: 1.6; }
+
+/* Service box (Right column) */
+.service-box { background: white; padding: 25px; border-radius: 16px; margin-bottom: 20px; box-shadow: 0 5px 15px rgba(0,0,0,0.03); }
+.service-box h3 { font-size: 16px; color: var(--primary); margin-bottom: 15px; }
+.service-box ul { list-style: none; }
+.service-box li { margin-bottom: 12px; font-size: 14px; display: flex; align-items: flex-start; gap: 10px; }
+.service-box li i { margin-top: 3px; }
+.service-box.warning h3 { color: var(--red); }
+.service-box.warning i { color: var(--red); }
+.service-box:not(.warning) i { color: #27ae60; }
+
+.badge-sale-detail {
+    position: absolute; top: 20px; left: 20px; background: var(--red);
+    color: white; padding: 5px 15px; border-radius: 50px; font-weight: bold;
+    font-size: 12px; z-index: 2;
+}
+
+@media (max-width: 992px) {
+    .detail-header-card { flex-direction: column; }
+    .detail-image-box { min-height: 300px; }
+    .detail-content-layout { flex-direction: column; }
+}
