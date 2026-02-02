@@ -3,46 +3,48 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TRIEUHAOTRAVEL - Khám phá hành trình mới</title>
+    <title>TRIEUHAOTRAVEL - Đồng Nai</title>
     <link rel="stylesheet" href="style.css">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
 </head>
 <body>
 
+    <!-- Header -->
     <header class="header">
         <div class="container main-header">
-            <!-- ĐÃ ĐỔI TÊN THÀNH TRIEUHAOTRAVEL -->
             <div class="logo"><a href="index.html"><i class="fas fa-plane-departure"></i> TRIEUHAO<span>TRAVEL</span></a></div>
             <div class="search-box">
-                <input type="text" placeholder="Bạn muốn đi đâu? (Đà Lạt, Phú Quốc...)">
+                <input type="text" placeholder="Tìm tour (Đà Lạt, Sapa, Thái Lan...)">
                 <button><i class="fas fa-search"></i></button>
             </div>
             <div class="cart-btn-wrapper">
                 <a href="cart.html" class="cart-icon">
-                    <i class="fas fa-map-marked-alt"></i>
+                    <i class="fas fa-suitcase-rolling"></i>
                     <span id="cart-count">0</span>
                 </a>
             </div>
         </div>
     </header>
 
+    <!-- Banner -->
     <div class="container">
-        <div class="banner" style="background-image: url('https://images.unsplash.com/photo-1476514525535-07fb3b4ae5f1?q=80&w=2070&auto=format&fit=crop');">
+        <div class="banner" style="background-image: url('https://images.unsplash.com/photo-1507525428034-b723cf961d3e?q=80&w=2070&auto=format&fit=crop');">
             <div class="banner-content">
-                <h1>Khám Phá Thế Giới</h1>
-                <p>Hàng ngàn Tour du lịch giá tốt cùng TRIEUHAOTRAVEL</p>
-                <button class="banner-btn">Xem Ưu Đãi</button>
+                <h1>HÀNH TRÌNH MƠ ƯỚC</h1>
+                <p>Khám phá thế giới cùng TRIEUHAOTRAVEL - Uy tín hàng đầu Đồng Nai</p>
+                <button class="banner-btn">XEM TOUR NGAY</button>
             </div>
         </div>
     </div>
 
+    <!-- Main Content -->
     <main class="container main-layout">
-        <!-- Sidebar Danh mục -->
+        <!-- Sidebar -->
         <aside class="sidebar">
             <div class="sidebar-box">
-                <h3 class="sidebar-title"><i class="fas fa-map-marker-alt"></i> ĐIỂM ĐẾN</h3>
+                <h3 class="sidebar-title"><i class="fas fa-map-signs"></i> ĐIỂM ĐẾN HOT</h3>
                 <ul class="category-list">
                     <li class="active" onclick="filterCategory('all', this)">Tất cả hành trình</li>
                     <li onclick="filterCategory('Miền Bắc', this)">Du lịch Miền Bắc</li>
@@ -51,103 +53,141 @@
                     <li onclick="filterCategory('Nước Ngoài', this)">Tour Nước Ngoài</li>
                 </ul>
             </div>
-            
-            <div class="sidebar-box" style="margin-top: 20px;">
-                <h3 class="sidebar-title"><i class="fas fa-filter"></i> GIÁ TOUR</h3>
+            <div class="sidebar-box">
+                <h3 class="sidebar-title"><i class="fas fa-filter"></i> LỌC THEO GIÁ</h3>
                 <div class="price-filter">
-                    <input type="number" id="min-price" placeholder="₫ Từ">
-                    <input type="number" id="max-price" placeholder="₫ Đến">
+                    <input type="number" id="min-price" placeholder="Giá từ...">
+                    <input type="number" id="max-price" placeholder="Đến...">
                     <button onclick="filterByPrice()" class="btn-apply">TÌM KIẾM</button>
                 </div>
             </div>
         </aside>
 
-        <!-- Cột hiển thị Tour -->
+        <!-- Product List -->
         <section class="content-area">
-            
             <div class="section-title flash-sale-header">
-                <h2><i class="fas fa-fire"></i> TOUR GIỜ CHÓT (GIÁ SỐC)</h2>
-                <div class="countdown">Kết thúc sau: 05 : 21 : 30</div>
+                <h2><i class="fas fa-bolt"></i> GIỜ VÀNG GIÁ SỐC</h2>
+                <div class="countdown">Kết thúc: 08:00:00</div>
             </div>
             <div class="product-grid" id="flash-sale-list"></div>
 
             <div class="section-title">
-                <h2>TOUR ĐƯỢC YÊU THÍCH NHẤT</h2>
+                <h2>TOUR ĐANG HOT</h2>
             </div>
             <div class="product-grid" id="product-list"></div>
 
             <div class="section-title">
-                <h2>HÀNH TRÌNH MỚI LẠ</h2>
+                <h2>ĐIỂM ĐẾN MỚI</h2>
             </div>
             <div class="product-grid" id="new-arrivals-list"></div>
-
         </section>
     </main>
 
-    <!-- Admin cho Tour -->
-    <button id="admin-trigger" onclick="toggleAdminPanel()"><i class="fas fa-user-shield"></i> Admin</button>
+    <!-- Nút mở Admin (Nổi góc trái dưới) -->
+    <button id="admin-trigger" onclick="toggleAdminPanel()" title="Quản lý Tour">
+        <i class="fas fa-cog"></i>
+    </button>
+
+    <!-- Modal Admin (Ẩn mặc định, chỉ hiện khi bấm nút) -->
     <div id="admin-panel" class="admin-modal">
         <div class="admin-content">
-            <div class="admin-header"><h3>Thêm Tour Mới</h3><span class="close-modal" onclick="toggleAdminPanel()">&times;</span></div>
-            <div class="form-group"><label>Tên Tour</label><input type="text" id="p-name" placeholder="Ví dụ: Tour Đà Lạt 3N2Đ"></div>
-            <div class="form-row">
-                <div class="form-group"><label>Giá gốc</label><input type="number" id="p-old-price"></div>
-                <div class="form-group"><label>Giá bán</label><input type="number" id="p-price"></div>
+            <div class="admin-header">
+                <h3>Thêm Tour Mới</h3>
+                <span class="close-detail" onclick="toggleAdminPanel()">&times;</span>
             </div>
             <div class="form-group">
-                <label>Vùng miền</label>
-                <select id="p-category" style="width:100%; padding:10px;">
-                    <option value="Miền Bắc">Miền Bắc</option>
-                    <option value="Miền Trung">Miền Trung</option>
+                <label>Tên Tour</label>
+                <input type="text" id="p-name" placeholder="Ví dụ: Tour Đà Lạt 3N3Đ">
+            </div>
+            <div class="form-group" style="display:flex; gap:10px;">
+                <div style="flex:1;">
+                    <label>Giá Gốc</label>
+                    <input type="number" id="p-old-price" placeholder="VNĐ">
+                </div>
+                <div style="flex:1;">
+                    <label>Giá Bán</label>
+                    <input type="number" id="p-price" placeholder="VNĐ">
+                </div>
+            </div>
+            <div class="form-group">
+                <label>Khu vực</label>
+                <select id="p-category">
                     <option value="Miền Nam">Miền Nam</option>
+                    <option value="Miền Trung">Miền Trung</option>
+                    <option value="Miền Bắc">Miền Bắc</option>
                     <option value="Nước Ngoài">Nước Ngoài</option>
                 </select>
             </div>
-            <div class="form-group"><label>Lịch trình (Ví dụ: 3 Ngày 2 Đêm)</label><input type="text" id="p-duration" placeholder="3 Ngày 2 Đêm"></div>
-            <div class="form-group"><label>Ảnh Tour</label><input type="file" id="p-file" accept="image/*"><div id="img-preview"></div></div>
+            <div class="form-group">
+                <label>Thời gian (Ví dụ: 3N2Đ)</label>
+                <input type="text" id="p-duration" placeholder="3 Ngày 2 Đêm">
+            </div>
+            <div class="form-group">
+                <label>Hình ảnh</label>
+                <input type="file" id="p-file" accept="image/*">
+                <div id="img-preview" style="margin-top:5px; height:50px; border:1px dashed #ccc;"></div>
+            </div>
             <div class="admin-footer">
-                <button class="btn-reset" onclick="resetData()">Khôi phục</button>
+                <button class="btn-reset" onclick="resetData()">Reset Dữ Liệu</button>
                 <button class="btn-save" onclick="saveProduct()">Lưu Tour</button>
             </div>
         </div>
     </div>
 
-    <!-- Footer TRIEUHAOTRAVEL -->
+    <!-- Modal Chi tiết Tour (Popup khi bấm vào tour) -->
+    <div id="tour-detail-modal" class="tour-modal" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.8); z-index:2000; justify-content:center; align-items:center;">
+        <div class="tour-modal-content" style="background:white; width:800px; padding:20px; border-radius:10px; position:relative;">
+            <span onclick="closeTourDetail()" style="position:absolute; right:15px; top:10px; font-size:30px; cursor:pointer;">&times;</span>
+            <div class="modal-grid" style="display:flex; gap:20px;">
+                <div class="modal-left" style="flex:1;"><img id="modal-img" src="" style="width:100%; height:300px; object-fit:cover; border-radius:8px;"></div>
+                <div class="modal-right" style="flex:1.2;">
+                    <h2 id="modal-title" style="color:#003366; margin-bottom:10px;"></h2>
+                    <p style="color:#666; margin-bottom:15px;"><i class="fas fa-clock"></i> <span id="modal-duration"></span> | <i class="fas fa-map-marker-alt"></i> <span id="modal-category"></span></p>
+                    <div style="font-size:24px; color:#d00000; font-weight:bold; margin-bottom:20px;" id="modal-price"></div>
+                    <p id="modal-desc" style="line-height:1.6; color:#444;">Hành trình thú vị đang chờ đón bạn.</p>
+                    <button id="modal-book-btn" class="add-to-cart-btn" style="margin-top:20px;">ĐẶT TOUR NGAY</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
     <footer class="footer">
         <div class="container footer-grid">
-            <div class="footer-col">
+            <div>
                 <h3 class="footer-logo">TRIEUHAO<span>TRAVEL</span></h3>
-                <p class="footer-desc">Mang đến những hành trình tuyệt vời nhất với chi phí hợp lý nhất. Trải nghiệm của bạn là sứ mệnh của chúng tôi.</p>
-                <div class="footer-social">
-                    <a href="#"><i class="fab fa-facebook-f"></i></a>
+                <p>Đơn vị lữ hành uy tín tại Đồng Nai. Chuyên tổ chức tour trong nước và quốc tế chất lượng cao.</p>
+                <div class="footer-social" style="margin-top:15px;">
+                    <a href="#"><i class="fab fa-facebook"></i></a>
                     <a href="#"><i class="fab fa-youtube"></i></a>
                     <a href="#"><i class="fab fa-tiktok"></i></a>
                 </div>
             </div>
-            <div class="footer-col">
+            <div>
                 <h3>VỀ CHÚNG TÔI</h3>
                 <ul>
-                    <li><a href="#">Giới thiệu công ty</a></li>
-                    <li><a href="#">Điều khoản sử dụng</a></li>
-                    <li><a href="#">Chính sách bảo mật</a></li>
+                    <li><a href="#">Giới thiệu</a></li>
+                    <li><a href="#">Dịch vụ Visa</a></li>
+                    <li><a href="#">Thuê xe du lịch</a></li>
                 </ul>
             </div>
-            <div class="footer-col">
+            <div class="contact-info">
                 <h3>LIÊN HỆ</h3>
-                <div class="contact-info">
-                    <p><i class="fas fa-phone-alt"></i> 025.1382.3388 – 0908.663.868</p>
-                    <p><i class="fas fa-envelope"></i> thtourist.vpbh@gmail.com</p>
-                    <p><i class="fas fa-map-marker-alt"></i> 21 Nguyễn Thị Hiền, phường Trấn Biên, tỉnh Đồng Nai</p>
-                </div>
+                <p><i class="fas fa-map-marker-alt"></i> 21 Nguyễn Thị Hiền, P. Trấn Biên, Đồng Nai</p>
+                <p><i class="fas fa-phone-alt"></i> 025.1382.3388</p>
+                <p><i class="fas fa-mobile-alt"></i> 0908.663.868</p>
+                <p><i class="fas fa-envelope"></i> thtourist.vpbh@gmail.com</p>
             </div>
-            <div class="footer-col">
+            <div>
                 <h3>THANH TOÁN</h3>
-                <div class="payment-methods">
-                    <i class="fab fa-cc-visa"></i> <i class="fab fa-cc-mastercard"></i> <i class="fas fa-money-check-alt"></i>
+                <div style="font-size:30px; display:flex; gap:10px;">
+                    <i class="fab fa-cc-visa"></i> <i class="fab fa-cc-mastercard"></i> <i class="fas fa-university"></i>
                 </div>
             </div>
         </div>
-        <div class="footer-bottom"><p>© 2026 TRIEUHAOTRAVEL - Khám phá vẻ đẹp Việt Nam</p></div>
+        <div class="footer-bottom">
+            <p>© 2026 TRIEUHAOTRAVEL. All rights reserved.</p>
+        </div>
     </footer>
 
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
