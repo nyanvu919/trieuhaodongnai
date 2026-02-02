@@ -2,52 +2,150 @@
 <html lang="vi">
 <head>
     <meta charset="UTF-8">
-    <title>Chi Tiết Tour - TRIEUHAOTRAVEL</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chi Tiết Hành Trình - TRIEUHAOTRAVEL</title>
     <link rel="stylesheet" href="style.css">
+    <!-- Icon & Font -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
 </head>
-<body style="background:#f9f9f9;">
+<body style="background-color: #f8f9fa;">
 
+    <!-- Header -->
     <header class="header">
         <div class="container main-header">
-            <div class="logo"><a href="index.html">TRIEUHAO<span>TRAVEL</span></a></div>
+            <div class="logo"><a href="index.html"><i class="fas fa-plane-departure"></i> TRIEUHAO<span>TRAVEL</span></a></div>
             <div class="cart-btn-wrapper">
                 <a href="cart.html" class="cart-icon">
-                    <i class="fas fa-suitcase-rolling"></i>
+                    <i class="fas fa- suitcase-rolling"></i>
                     <span id="cart-count">0</span>
                 </a>
             </div>
         </div>
     </header>
 
-    <main class="container" style="margin-top: 40px; padding-bottom: 100px;">
+    <main class="container" style="margin-top: 30px;">
+        <!-- Nút quay lại -->
         <div style="margin-bottom: 20px;">
-            <a href="index.html" style="color: #666; text-decoration: none;"><i class="fas fa-arrow-left"></i> Quay lại trang chủ</a>
+            <a href="index.html" class="back-to-home"><i class="fas fa-chevron-left"></i> Quay lại danh sách Tour</a>
         </div>
 
-        <div class="detail-layout">
-            <div class="detail-left">
-                <img id="detail-img" src="" alt="" style="width:100%; border-radius:12px; box-shadow: 0 5px 15px rgba(0,0,0,0.1);">
+        <div class="detail-wrapper">
+            <!-- PHẦN TRÊN: ẢNH VÀ THÔNG TIN CHÍNH -->
+            <div class="detail-header-card">
+                <div class="detail-image-box">
+                    <img id="detail-img" src="" alt="Tour Image">
+                    <div id="detail-badge" class="badge-sale-detail">GIẢM GIÁ SỐC</div>
+                </div>
+                
+                <div class="detail-info-box">
+                    <h1 id="detail-title">Tên Tour Du Lịch</h1>
+                    <div class="tour-meta-tags">
+                        <span id="detail-duration"><i class="far fa-clock"></i> ---</span>
+                        <span id="detail-category"><i class="fas fa-map-marker-alt"></i> ---</span>
+                        <span><i class="fas fa-user-check"></i> Đang mở bán</span>
+                    </div>
+
+                    <div class="price-container">
+                        <div class="price-label">Giá trọn gói từ:</div>
+                        <div class="price-values">
+                            <span id="detail-price" class="main-price">0đ</span>
+                            <span id="detail-old-price" class="old-price-detail">0đ</span>
+                        </div>
+                    </div>
+
+                    <div class="promo-box">
+                        <p><i class="fas fa-gift"></i> Tặng ngay bảo hiểm du lịch lên đến 50.000.000đ</p>
+                        <p><i class="fas fa-check"></i> Miễn phí xe đưa đón từ sân bay</p>
+                    </div>
+
+                    <button id="detail-book-btn" class="btn-primary-large">
+                        <i class="fas fa-calendar-check"></i> ĐẶT TOUR NGAY
+                    </button>
+                    <p style="text-align: center; font-size: 13px; color: #666; margin-top: 10px;">Liên hệ: 025.1382.3388 để được tư vấn</p>
+                </div>
             </div>
-            <div class="detail-right">
-                <h1 id="detail-title" style="color: #003366; margin-bottom: 15px;">Tên Tour</h1>
-                <div class="detail-meta" style="margin-bottom: 20px; color: #777;">
-                    <span id="detail-duration"></span> | <span id="detail-category"></span>
+
+            <!-- PHẦN DƯỚI: NỘI DUNG CHI TIẾT -->
+            <div class="detail-content-layout">
+                <!-- Cột trái: Lịch trình & Giới thiệu -->
+                <div class="content-left">
+                    <div class="content-section">
+                        <h2 class="section-heading">GIỚI THIỆU TOUR</h2>
+                        <p id="detail-desc" class="description-text"></p>
+                    </div>
+
+                    <div class="content-section">
+                        <h2 class="section-heading">LỊCH TRÌNH CHI TIẾT</h2>
+                        <div class="itinerary-list" id="detail-itinerary">
+                            <!-- JS sẽ điền lịch trình vào đây (nếu có) hoặc hiện mô tả mặc định -->
+                            <div class="itinerary-item">
+                                <div class="day-circle">1</div>
+                                <div class="day-content">
+                                    <h4>KHỞI HÀNH - THAM QUAN ĐIỂM ĐẾN ĐẦU TIÊN</h4>
+                                    <p>Xe và hướng dẫn viên đón đoàn tại điểm hẹn, khởi hành đi tham quan các địa điểm nổi bật trong chương trình. Ăn trưa và nhận phòng khách sạn nghỉ ngơi.</p>
+                                </div>
+                            </div>
+                            <div class="itinerary-item">
+                                <div class="day-circle">2</div>
+                                <div class="day-content">
+                                    <h4>KHÁM PHÁ CHI TIẾT - TRẢI NGHIỆM VĂN HÓA</h4>
+                                    <p>Quý khách dùng bữa sáng, sau đó lên đường khám phá những điểm đến hấp dẫn nhất của hành trình. Tham gia các hoạt động vui chơi, mua sắm đặc sản địa phương.</p>
+                                </div>
+                            </div>
+                            <div class="itinerary-item">
+                                <div class="day-circle">...</div>
+                                <div class="day-content">
+                                    <h4>KẾT THÚC HÀNH TRÌNH - CHÀO TẠM BIỆT</h4>
+                                    <p>Tự do tham quan trước khi xe đưa đoàn ra sân bay hoặc điểm hẹn ban đầu. Kết thúc chương trình tour tốt đẹp.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <div class="detail-price-box" style="background: white; padding: 25px; border-radius: 12px; box-shadow: 0 2px 10px rgba(0,0,0,0.05);">
-                    <div style="font-size: 14px; color: #888;">Giá Tour trọn gói từ:</div>
-                    <div id="detail-price" style="font-size: 32px; color: #d00000; font-weight: 800; margin: 10px 0;"></div>
-                    <button id="detail-book-btn" class="btn-book" style="width:100%; padding: 18px; font-size: 18px;">ĐẶT TOUR NGAY</button>
-                </div>
-                <div style="margin-top: 30px;">
-                    <h3 style="margin-bottom: 15px; border-bottom: 2px solid #003366; display: inline-block;">LỊCH TRÌNH CHI TIẾT</h3>
-                    <p id="detail-desc" style="line-height: 1.8; color: #444; white-space: pre-line;"></p>
+
+                <!-- Cột phải: Dịch vụ bao gồm -->
+                <div class="content-right">
+                    <div class="service-box">
+                        <h3>DỊCH VỤ BAO GỒM</h3>
+                        <ul>
+                            <li><i class="fas fa-check-circle"></i> Khách sạn 3-5 sao</li>
+                            <li><i class="fas fa-check-circle"></i> Các bữa ăn theo chương trình</li>
+                            <li><i class="fas fa-check-circle"></i> Vé tham quan trọn gói</li>
+                            <li><i class="fas fa-check-circle"></i> Hướng dẫn viên suốt tuyến</li>
+                            <li><i class="fas fa-check-circle"></i> Nước suối & khăn lạnh</li>
+                        </ul>
+                    </div>
+                    <div class="service-box warning">
+                        <h3>KHÔNG BAO GỒM</h3>
+                        <ul>
+                            <li><i class="fas fa-times-circle"></i> Thuế VAT</li>
+                            <li><i class="fas fa-times-circle"></i> Chi tiêu cá nhân</li>
+                            <li><i class="fas fa-times-circle"></i> Tips cho tài xế/HDV</li>
+                        </ul>
+                    </div>
                 </div>
             </div>
         </div>
     </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container footer-grid">
+            <div class="footer-col">
+                <h3 class="footer-logo">TRIEUHAO<span>TRAVEL</span></h3>
+                <p>Uy tín tạo niềm tin. Hành trình của bạn là sứ mệnh của chúng tôi.</p>
+            </div>
+            <div class="footer-col">
+                <h3>LIÊN HỆ</h3>
+                <p><i class="fas fa-phone-alt"></i> 025.1382.3388</p>
+                <p><i class="fas fa-envelope"></i> thtourist.vpbh@gmail.com</p>
+                <p><i class="fas fa-map-marker-alt"></i> Trấn Biên, Đồng Nai</p>
+            </div>
+        </div>
+        <div class="footer-bottom"><p>© 2026 TRIEUHAOTRAVEL</p></div>
+    </footer>
 
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
     <script src="app.js"></script>
