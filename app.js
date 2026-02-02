@@ -1,4 +1,6 @@
-// --- DỮ LIỆU TOUR MẪU ---
+// ==========================================
+// 1. DỮ LIỆU TOUR MẪU (Lưu vào máy người dùng)
+// ==========================================
 const defaultData = [
     { id: 1, name: "Tour Cao Cấp: Phú Quốc - Ngắm Hoàng Hôn 3N2Đ", price: 4500000, oldPrice: 6200000, img: "https://images.unsplash.com/photo-1589394815804-964ed96aeb33?q=80&w=500", category: "Miền Nam", duration: "3 Ngày 2 Đêm" },
     { id: 2, name: "Khám Phá Đà Lạt: Thành Phố Ngàn Hoa", price: 2900000, oldPrice: 3800000, img: "https://images.unsplash.com/photo-1594498653385-d5172c532c00?q=80&w=500", category: "Miền Trung", duration: "2 Ngày 1 Đêm" },
@@ -12,12 +14,16 @@ let products = JSON.parse(localStorage.getItem('jiaoTours')) || defaultData;
 let cart = JSON.parse(localStorage.getItem('jiaoBooking')) || [];
 let tempImg = "";
 
+// ==========================================
+// 2. KHỞI CHẠY KHI VÀO WEB
+// ==========================================
 document.addEventListener('DOMContentLoaded', () => {
     updateCartCount();
     if (document.getElementById('product-list')) renderAllSections(products);
     if (document.getElementById('cart-list-container')) renderCart();
 });
 
+// --- RENDER DANH SÁCH TOUR ---
 function renderGrid(containerId, data) {
     const grid = document.getElementById(containerId);
     if (!grid) return;
@@ -48,6 +54,7 @@ function renderAllSections(data) {
     renderGrid('new-arrivals-list', [...data].reverse().slice(0, 4));
 }
 
+// --- LỌC DANH MỤC ---
 window.filterCategory = function(cat, el) {
     document.querySelectorAll('.category-list li').forEach(li => li.classList.remove('active'));
     el.classList.add('active');
@@ -55,7 +62,15 @@ window.filterCategory = function(cat, el) {
     renderGrid('product-list', filtered);
 }
 
-// --- GIỎ HÀNG / ĐẶT TOUR ---
+// --- LỌC GIÁ ---
+window.filterByPrice = function() {
+    const min = document.getElementById('min-price').value || 0;
+    const max = document.getElementById('max-price').value || Infinity;
+    const filtered = products.filter(p => p.price >= min && p.price <= max);
+    renderGrid('product-list', filtered);
+}
+
+// --- QUẢN LÝ GIỎ HÀNG (DANH SÁCH TOUR CHỌN) ---
 window.addToCart = function(id) {
     if(document.body.classList.contains('admin-mode')) return;
     const prod = products.find(p => p.id === id);
@@ -63,7 +78,7 @@ window.addToCart = function(id) {
     if (item) item.qty++; else cart.push({...prod, qty: 1});
     localStorage.setItem('jiaoBooking', JSON.stringify(cart));
     updateCartCount();
-    Toastify({ text: "✅ Đã thêm vào danh sách chờ đặt!", style: { background: "#003366" } }).showToast();
+    if(window.Toastify) Toastify({ text: "✅ Đã thêm tour vào danh sách!", style: { background: "#003366" } }).showToast();
 }
 
 function updateCartCount() {
@@ -75,7 +90,7 @@ function renderCart() {
     const container = document.getElementById('cart-list-container');
     if (!container) return;
     if (cart.length === 0) {
-        container.innerHTML = `<p style="text-align:center; padding:50px; color:#888;">Chưa có tour nào được chọn.</p>`;
+        container.innerHTML = `<p style="text-align:center; padding:50px; color:#888;">Bạn chưa chọn tour nào.</p>`;
         return;
     }
     let total = 0;
@@ -87,24 +102,24 @@ function renderCart() {
                 <img src="${item.img}" style="width:60px; height:60px; object-fit:cover; border-radius:5px;">
                 <div>
                     <div style="font-size:14px; font-weight:700;">${item.name}</div>
-                    <div style="font-size:11px; color:#666;">Thời gian: ${item.duration}</div>
+                    <div style="font-size:11px; color:#666;">${item.duration}</div>
                 </div>
             </div>
             <div style="flex:1; text-align:center;">${item.price.toLocaleString()}đ</div>
             <div style="flex:1; text-align:center;">
-                <div class="qty-control" style="width: 80px; margin: auto;">
-                    <button onclick="changeQty(${index}, -1)">-</button>
-                    <span>${item.qty}</span>
-                    <button onclick="changeQty(${index}, 1)">+</button>
-                </div>
+                <button onclick="changeQty(${index}, -1)">-</button>
+                <span style="margin:0 5px;">${item.qty}</span>
+                <button onclick="changeQty(${index}, 1)">+</button>
             </div>
             <div style="flex:1; text-align:center; color:#003366; font-weight:700;">${(item.price * item.qty).toLocaleString()}đ</div>
             <div style="width:30px;"><i class="fas fa-trash" style="color:red; cursor:pointer;" onclick="removeItem(${index})"></i></div>
         </div>`;
     }).join('');
     const totalStr = total.toLocaleString() + 'đ';
-    document.getElementById('temp-total').innerText = totalStr;
-    document.getElementById('final-total').innerText = totalStr;
+    const tempT = document.getElementById('temp-total');
+    const finalT = document.getElementById('final-total');
+    if(tempT) tempT.innerText = totalStr;
+    if(finalT) finalT.innerText = totalStr;
 }
 
 window.changeQty = function(i, d) {
@@ -122,45 +137,77 @@ window.removeItem = function(i) {
     updateCartCount();
 }
 
-// --- GỬI ĐƠN ĐẶT TOUR QUA FORMSPREE ---
+// ==========================================
+// 3. CHỨC NĂNG ĐẶT TOUR GỬI VỀ EMAIL (FORMSPREE)
+// ==========================================
 window.processCheckoutPage = function() {
-    const name = document.getElementById('c-name').value;
-    const phone = document.getElementById('c-phone').value;
-    const addr = document.getElementById('c-address').value;
+    const nameEl = document.getElementById('c-name');
+    const phoneEl = document.getElementById('c-phone');
+    const addrEl = document.getElementById('c-address');
+    const finalPriceEl = document.getElementById('final-total');
+
+    if (!nameEl || !phoneEl || !addrEl) return;
+
+    const name = nameEl.value;
+    const phone = phoneEl.value;
+    const addr = addrEl.value;
 
     if (!name || !phone || !addr) {
-        alert("Vui lòng điền thông tin để chúng tôi liên hệ!");
+        alert("Vui lòng nhập đầy đủ thông tin để JiaoTravel liên hệ!");
         return;
     }
 
+    if (cart.length === 0) {
+        alert("Danh sách tour đang trống!");
+        return;
+    }
+
+    // Đổi trạng thái nút
     const btn = document.querySelector('.btn-checkout-page');
-    btn.innerText = "ĐANG XỬ LÝ ĐƠN...";
+    const oldText = btn.innerText;
+    btn.innerText = "ĐANG GỬI YÊU CẦU...";
     btn.disabled = true;
 
-    const tourList = cart.map(i => `- ${i.name} (${i.duration}) x ${i.qty} khách`).join("\n");
-    const total = document.getElementById('final-total').innerText;
+    // Chuẩn bị dữ liệu gửi đi
+    const listTour = cart.map(i => `- ${i.name} (SL: ${i.qty} khách)`).join("\n");
+    const total = finalPriceEl ? finalPriceEl.innerText : "0đ";
 
-    fetch("https://formspree.io/f/mqkrvpqz", {
+    const payload = {
+        "Khách Hàng": name,
+        "Số Điện Thoại": phone,
+        "Địa Chỉ": addr,
+        "Tour Đã Chọn": listTour,
+        "Tổng Tiền Dự Kiến": total
+    };
+
+    // LINK FORMSPREE CỦA BẠN ĐÃ ĐƯỢC DÁN VÀO ĐÂY
+    fetch("https://formspree.io/f/xwvqqlqp", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-            "Khách Đặt": name,
-            "SĐT Liên Hệ": phone,
-            "Địa Chỉ": addr,
-            "Danh Sách Tour": tourList,
-            "Tổng Tiền Dự Kiến": total
-        })
-    }).then(res => {
+        body: JSON.stringify(payload)
+    })
+    .then(res => {
         if (res.ok) {
-            alert("✅ Đã nhận yêu cầu đặt tour!\nNhân viên JiaoTravel sẽ gọi lại cho bạn ngay.");
+            alert(`✅ Đã gửi yêu cầu thành công!\nCảm ơn ${name}, JiaoTravel sẽ gọi lại cho bạn qua số ${phone} ngay.`);
             cart = [];
             localStorage.removeItem('jiaoBooking');
             window.location.href = 'index.html';
+        } else {
+            alert("❌ Lỗi gửi yêu cầu. Vui lòng thử lại!");
+            btn.innerText = oldText;
+            btn.disabled = false;
         }
+    })
+    .catch(() => {
+        alert("❌ Lỗi kết nối mạng!");
+        btn.innerText = oldText;
+        btn.disabled = false;
     });
 }
 
-// --- ADMIN ---
+// ==========================================
+// 4. ADMIN PANEL (QUẢN LÝ TOUR)
+// ==========================================
 window.toggleAdminPanel = function() {
     document.getElementById('admin-panel').classList.toggle('open');
     document.body.classList.toggle('admin-mode');
@@ -182,8 +229,8 @@ window.saveProduct = function() {
         price: Number(document.getElementById('p-price').value),
         oldPrice: Number(document.getElementById('p-old-price').value),
         category: document.getElementById('p-category').value,
-        duration: document.getElementById('p-duration').value || "Theo yêu cầu",
-        img: tempImg || "https://via.placeholder.com/300"
+        duration: document.getElementById('p-duration').value || "3 Ngày 2 Đêm",
+        img: tempImg || "https://via.placeholder.com/300?text=JiaoTravel"
     };
     products.unshift(p);
     localStorage.setItem('jiaoTours', JSON.stringify(products));
@@ -191,7 +238,7 @@ window.saveProduct = function() {
 }
 
 window.deleteProduct = function(id) {
-    if(confirm("Xóa tour này?")) {
+    if(confirm("Bạn muốn xóa Tour này?")) {
         products = products.filter(p => p.id !== id);
         localStorage.setItem('jiaoTours', JSON.stringify(products));
         location.reload();
@@ -199,6 +246,8 @@ window.deleteProduct = function(id) {
 }
 
 window.resetData = function() {
-    localStorage.removeItem('jiaoTours');
-    location.reload();
+    if(confirm("Khôi phục dữ liệu Tour mặc định?")) {
+        localStorage.removeItem('jiaoTours');
+        location.reload();
+    }
 }
